@@ -68,8 +68,8 @@ def hitung_statistik():
         ax.set_xlim(1, 50)
         ax.set_xticks(range(1, 51))
         ax.tick_params(axis='x', labelsize=7) 
-
-        ax.set_yticks(range(0, max(data) + 5, max(1, max(data)//10)))
+        ax.set_ylim(0, 50)               
+        ax.set_yticks(range(0, 51, 5))  
         ax.grid(True, linestyle='--', alpha=0.5)
         for i, val in enumerate(data):
             ax.annotate(str(val), (i + 1, val), textcoords="offset points", xytext=(0,5), ha='center', fontsize=7)
