@@ -1,7 +1,10 @@
 # PyInstaller folders and files
 build/
 dist/
+test/
+claude.md
 *.spec
+
 
 # Temporary files & outputs
 temp_grafik.png

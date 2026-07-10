@@ -46,11 +46,15 @@ def hitung_statistik():
        
         global hasil_tes
         hasil_tes = {
-            "prestasi": prestasi, "tempo": tempo, "konsistensi": konsistensi, 
-            "ketahanan": ketahanan, "ketelitian": ketelitian, 
+            "prestasi": prestasi, "tempo": tempo, "konsistensi": konsistensi,
+            "ketahanan": ketahanan, "ketelitian": ketelitian,
             "min": min(data), "max": max(data),
-            "kat_prestasi": kat_pres, "kat_tempo": kat_temp, 
-            "kat_konsistensi": kat_kon, "kat_ketahanan": kat_ket
+            "kat_prestasi": kat_pres, "kat_tempo": kat_temp,
+            "kat_konsistensi": kat_kon, "kat_ketahanan": kat_ket,
+            "nama": entry_nama.get().strip(),
+            "posisi": entry_posisi.get().strip(),
+            "perusahaan": entry_perusahaan.get().strip(),
+            "tanggal": entry_tanggal.get().strip()
         }
 
         
@@ -105,7 +109,23 @@ def ekspor_pdf():
         pdf.set_font("Arial", size=11)
         waktu_sekarang = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         pdf.image("temp_grafik.png", x=10, y=25, w=190)
-        pdf.set_y(150)
+
+        #Data Peserta 
+        pdf.set_y(120)
+        pdf.set_font("Arial", 'B', 11)
+        pdf.cell(0, 12, "DATA PESERTA", ln=True)
+        pdf.set_font("Arial", size=10)
+        label_w = 35
+        pdf.cell(label_w, 6, "Nama", border=0)
+        pdf.cell(0, 6, f": {hasil_tes['nama']}", ln=True)
+        pdf.cell(label_w, 6, "Posisi", border=0)
+        pdf.cell(0, 6, f": {hasil_tes['posisi']}", ln=True)
+        pdf.cell(label_w, 6, "Perusahaan", border=0)
+        pdf.cell(0, 6, f": {hasil_tes['perusahaan']}", ln=True)
+        pdf.cell(label_w, 6, "Tanggal Ujian", border=0)
+        pdf.cell(0, 6, f": {hasil_tes['tanggal']}", ln=True)
+
+        pdf.set_y(170)
         col1, col2, col3 = 80, 50, 60
         pdf.set_font("Arial", 'B', 10)
         pdf.cell(col1, 8, "Aspek", border=1)
@@ -147,6 +167,26 @@ root.geometry("850x650")
 
 frame_top = tk.Frame(root, pady=10)
 frame_top.pack(fill=tk.X)
+
+#Baris 0 - Identitas Peserta
+frame_identitas = tk.Frame(frame_top)
+frame_identitas.pack(pady=5)
+
+tk.Label(frame_identitas, text="Nama:", font=("Arial", 9, "bold")).grid(row=0, column=0, sticky="e", padx=5, pady=2)
+entry_nama = tk.Entry(frame_identitas, width=30)
+entry_nama.grid(row=0, column=1, padx=5, pady=2)
+
+tk.Label(frame_identitas, text="Posisi:", font=("Arial", 9, "bold")).grid(row=0, column=2, sticky="e", padx=5, pady=2)
+entry_posisi = tk.Entry(frame_identitas, width=30)
+entry_posisi.grid(row=0, column=3, padx=5, pady=2)
+
+tk.Label(frame_identitas, text="Perusahaan:", font=("Arial", 9, "bold")).grid(row=1, column=0, sticky="e", padx=5, pady=2)
+entry_perusahaan = tk.Entry(frame_identitas, width=30)
+entry_perusahaan.grid(row=1, column=1, padx=5, pady=2)
+
+tk.Label(frame_identitas, text="Tanggal Ujian:", font=("Arial", 9, "bold")).grid(row=1, column=2, sticky="e", padx=5, pady=2)
+entry_tanggal = tk.Entry(frame_identitas, width=30)
+entry_tanggal.grid(row=1, column=3, padx=5, pady=2)
 
 #Baris 1
 tk.Label(frame_top, text="Masukkan 50 Nilai Puncak (Spasi):", font=("Arial", 9, "bold")).pack()
