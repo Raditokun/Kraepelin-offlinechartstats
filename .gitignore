@@ -1,0 +1,12 @@
+# PyInstaller folders and files
+build/
+dist/
+*.spec
+
+# Temporary files & outputs
+temp_grafik.png
+*.pdf
+
+# Python cache
+__pycache__/
+*.pyc
